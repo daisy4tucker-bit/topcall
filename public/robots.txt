@@ -1,0 +1,26 @@
+# robots.txt for Top Call Girls Platform
+# Clean crawl architecture: index high-value regional hubs & verified public profiles
+# Disallow administrative, moderation, authentication, and private backend pathways
+
+User-agent: *
+
+# Allow Public Content
+Allow: /
+Allow: /united-states/
+Allow: /canada/
+Allow: /profiles/
+
+# Disallow Private & Administrative Endpoints
+Disallow: /admin
+Disallow: /admin/
+Disallow: /admin/*
+Disallow: /api/admin/
+Disallow: /moderation/
+Disallow: /audit-logs/
+Disallow: /reports/new
+
+# Crawl Delay to Prevent Server Overload
+Crawl-delay: 1
+
+# XML Sitemap Location
+Sitemap: https://www.topcallgirls.online/sitemap.xml

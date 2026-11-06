@@ -1,0 +1,6 @@
+{
+  "name": "Aura Directory - Location-Based Profile Directory",
+  "description": "A modern, responsive location-based adult-oriented profile directory MVP setup with city filtering, verified badges, and safety compliance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+html, body, #root {
+  background-color: #071322;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom dark scrollbar matching theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #071322;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1e293b #071322;
+}
+
+@keyframes sonar-beep {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.75);
+  }
+  60% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.sonar-beeping {
+  animation: sonar-beep 1.3s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes breadcrumbSlideIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(-8px, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes breadcrumbItemSlide {
+  0% {
+    opacity: 0;
+    transform: translate3d(-6px, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes badgeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(-6px, 0, 0) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.animate-breadcrumb-slide {
+  animation: breadcrumbSlideIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-breadcrumb-item {
+  animation: breadcrumbItemSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-breadcrumb-badge {
+  animation: badgeSlideIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
