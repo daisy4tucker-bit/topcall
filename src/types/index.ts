@@ -20,6 +20,7 @@ export interface ProfileContactInfo {
 export interface Profile {
   id: string;
   slug: string; // e.g. "elena-vance", "sasha-laurent"
+  directUrl?: string; // Canonical full direct link: https://www.topcallgirls.online/profiles/:slug
   displayName: string;
   handle: string;
   tagline: string;

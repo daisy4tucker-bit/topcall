@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Top Call Girls — Redirecting</title>
+    <script>
+      // Single Page Application routing fallback for static hosts on hard refresh
+      const pathSegments = window.location.pathname.split('/').filter(Boolean);
+      const isProfile = pathSegments[0] === 'profiles' && pathSegments[1];
+      // Keep path in sessionStorage to restore if needed
+      try {
+        sessionStorage.setItem('spa_redirect_path', window.location.pathname);
+      } catch (e) {}
+      // Redirect to main index.html preserving URL
+      window.location.replace('/' + (window.location.search || '') + (window.location.hash || ''));
+    </script>
+    <meta http-equiv="refresh" content="0;URL='/'" />
+  </head>
+  <body style="background-color: #071322; color: #fff; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0;">
+    <div style="text-align: center;">
+      <p style="font-size: 14px; opacity: 0.8;">Loading Top Call Girls Directory...</p>
+    </div>
+  </body>
+</html>

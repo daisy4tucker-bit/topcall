@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ShieldCheck, MapPin, Star, Calendar, MessageCircle, Phone, Lock, Heart, Check, Sparkles, Image as ImageIcon } from 'lucide-react';
+import { X, ShieldCheck, MapPin, Star, Calendar, MessageCircle, Phone, Lock, Heart, Check, Sparkles, Image as ImageIcon, Copy, Globe, ExternalLink } from 'lucide-react';
 import { Profile } from '../types';
 import { getPublicPublishedPhotos } from '../services/storageService';
 import { GoldVerifiedBadge } from './ui/GoldVerifiedBadge';
@@ -22,6 +22,7 @@ export const ProfileDetailModal: React.FC<ProfileDetailModalProps> = ({ profile,
 
   // Stateful image swapper for active profile preview
   const [activePreviewImg, setActivePreviewImg] = useState<string>(profile.avatarUrl);
+  const [copiedDirectLink, setCopiedDirectLink] = useState(false);
 
   const displayCover = profile.coverUrl || (galleryList.length > 1 ? galleryList[1] : galleryList[0]);
 
@@ -86,6 +87,45 @@ export const ProfileDetailModal: React.FC<ProfileDetailModalProps> = ({ profile,
             <div className="bg-zinc-950/80 p-3 rounded-xl border border-zinc-800 text-right">
               <span className="text-[10px] uppercase text-zinc-400 block font-semibold">Standard Rate</span>
               <span className="text-xl font-extrabold text-amber-400">{profile.startingRate || 'Inquire'}</span>
+            </div>
+          </div>
+
+          {/* Direct Canonical URL Link */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-2.5 px-3.5 rounded-xl bg-zinc-950 border border-zinc-800 text-xs">
+            <div className="flex items-center gap-2 truncate">
+              <Globe className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+              <span className="text-zinc-400 font-semibold text-[11px] shrink-0">Direct URL:</span>
+              <a
+                href={profile.directUrl || `https://www.topcallgirls.online/profiles/${profile.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-emerald-400 hover:text-emerald-300 hover:underline font-bold text-[11px] truncate"
+              >
+                {profile.directUrl || `https://www.topcallgirls.online/profiles/${profile.slug}`}
+              </a>
+            </div>
+            <div className="flex items-center gap-1.5 shrink-0 self-end sm:self-auto">
+              <button
+                type="button"
+                onClick={() => {
+                  navigator.clipboard?.writeText(profile.directUrl || `https://www.topcallgirls.online/profiles/${profile.slug}`);
+                  setCopiedDirectLink(true);
+                  setTimeout(() => setCopiedDirectLink(false), 2000);
+                }}
+                className="px-2.5 py-1 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 hover:text-white transition cursor-pointer font-semibold text-[11px] flex items-center gap-1"
+                title="Copy Direct URL"
+              >
+                {copiedDirectLink ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3 text-rose-400" />}
+                <span>{copiedDirectLink ? 'Copied URL!' : 'Copy Direct Link'}</span>
+              </button>
+              <a
+                href={`/profiles/${profile.slug}`}
+                className="p-1 px-2.5 rounded-lg bg-rose-600 hover:bg-rose-500 text-white font-semibold text-[11px] flex items-center gap-1 transition"
+                title="Open Direct Profile Page"
+              >
+                <span>Open Page</span>
+                <ExternalLink className="w-3 h-3" />
+              </a>
             </div>
           </div>
 

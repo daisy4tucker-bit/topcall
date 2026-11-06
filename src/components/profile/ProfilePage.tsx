@@ -21,7 +21,9 @@ import {
   Mail,
   MessageSquare,
   AlertCircle,
-  ShieldAlert
+  ShieldAlert,
+  Copy,
+  Check
 } from 'lucide-react';
 import { Profile } from '../../types';
 import { LocationBreadcrumbs } from '../location/LocationBreadcrumbs';
@@ -59,6 +61,8 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [galleryInitialIdx, setGalleryInitialIdx] = useState(0);
   const [copiedLink, setCopiedLink] = useState(false);
+  const [copiedDirectUrl, setCopiedDirectUrl] = useState(false);
+  const canonicalDirectUrl = profile.directUrl || `https://www.topcallgirls.online/profiles/${profile.slug}`;
   const [reportModalOpen, setReportModalOpen] = useState(false);
   const [removalModalOpen, setRemovalModalOpen] = useState(false);
   const [reportingPhotoUrl, setReportingPhotoUrl] = useState<string | undefined>(undefined);
@@ -279,6 +283,36 @@ export const ProfilePage: React.FC<ProfilePageProps> = ({
 
                 <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-300 font-medium">
                   <span className="text-zinc-400 font-mono">{profile.handle}</span>
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-black/60 border border-zinc-700/80 text-[11px]">
+                    <Globe className="w-3 h-3 text-rose-400 shrink-0" />
+                    <span className="text-zinc-400 font-medium">Direct Link:</span>
+                    <a
+                      href={canonicalDirectUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono text-emerald-400 hover:text-emerald-300 hover:underline font-semibold"
+                      title="Direct Profile URL"
+                    >
+                      {canonicalDirectUrl}
+                    </a>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        navigator.clipboard?.writeText(canonicalDirectUrl);
+                        setCopiedDirectUrl(true);
+                        setTimeout(() => setCopiedDirectUrl(false), 2000);
+                      }}
+                      className="p-1 rounded bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white transition cursor-pointer"
+                      title="Copy Direct URL"
+                    >
+                      {copiedDirectUrl ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                    </button>
+                  </div>
+                  {copiedDirectUrl && (
+                    <span className="text-emerald-400 font-bold text-[11px] animate-in fade-in">
+                      ✓ Copied!
+                    </span>
+                  )}
                 </div>
 
                 {(profile.slug === 'aria-sterling' || profile.displayName.toLowerCase().includes('aria')) && (

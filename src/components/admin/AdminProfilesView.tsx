@@ -14,7 +14,9 @@ import {
   Eye,
   SlidersHorizontal,
   ArrowUpDown,
-  Sparkles
+  Sparkles,
+  Copy,
+  Check
 } from 'lucide-react';
 import { ExtendedProfile, ProfileStatus } from '../../types/admin';
 import { Button } from '../ui/Button';
@@ -43,6 +45,17 @@ export const AdminProfilesView: React.FC<AdminProfilesViewProps> = ({
   const [statusFilter, setStatusFilter] = useState<'all' | ProfileStatus>('all');
   const [cityFilter, setCityFilter] = useState('all');
   const [sortBy, setSortBy] = useState<'name' | 'rating' | 'status' | 'age'>('name');
+  const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
+
+  const handleCopyUrl = (e: React.MouseEvent, slug: string) => {
+    e.stopPropagation();
+    const url = `https://www.topcallgirls.online/profiles/${slug}`;
+    if (navigator?.clipboard?.writeText) {
+      navigator.clipboard.writeText(url);
+      setCopiedSlug(slug);
+      setTimeout(() => setCopiedSlug(null), 2000);
+    }
+  };
 
   const filteredProfiles = useMemo(() => {
     return profiles
@@ -209,8 +222,31 @@ export const AdminProfilesView: React.FC<AdminProfilesViewProps> = ({
                             </span>
                           )}
                         </div>
-                        <div className="text-[11px] text-zinc-500 font-mono">
-                          /profiles/{profile.slug}
+                        <div className="flex items-center gap-1.5 mt-0.5">
+                          <a
+                            href={`https://www.topcallgirls.online/profiles/${profile.slug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="text-[11px] text-zinc-400 hover:text-amber-400 font-mono transition-colors flex items-center gap-1 hover:underline"
+                            title="Direct profile URL"
+                          >
+                            <span>/profiles/{profile.slug}</span>
+                            <ExternalLink className="w-2.5 h-2.5 opacity-60" />
+                          </a>
+                          <button
+                            type="button"
+                            onClick={(e) => handleCopyUrl(e, profile.slug)}
+                            className="p-1 text-zinc-500 hover:text-amber-400 transition-colors rounded hover:bg-zinc-800/60"
+                            title="Copy direct canonical link"
+                            aria-label="Copy direct link"
+                          >
+                            {copiedSlug === profile.slug ? (
+                              <Check className="w-3 h-3 text-emerald-400" />
+                            ) : (
+                              <Copy className="w-3 h-3" />
+                            )}
+                          </button>
                         </div>
                       </div>
                     </div>

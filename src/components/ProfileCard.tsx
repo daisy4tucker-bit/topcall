@@ -1,5 +1,5 @@
-import React from 'react';
-import { ShieldCheck, MapPin, Star, Heart, Sparkles, ChevronRight, Check, Camera, Languages } from 'lucide-react';
+import React, { useState } from 'react';
+import { ShieldCheck, MapPin, Star, Heart, Sparkles, ChevronRight, Check, Camera, Languages, Copy, Globe } from 'lucide-react';
 import { Profile } from '../types';
 import { getPublicPublishedPhotos } from '../services/storageService';
 import { Badge } from './ui/Badge';
@@ -22,6 +22,8 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
   layoutView = 'grid',
 }) => {
   const profileUrl = `/profiles/${profile.slug}`;
+  const canonicalDirectUrl = profile.directUrl || `https://www.topcallgirls.online/profiles/${profile.slug}`;
+  const [copiedLink, setCopiedLink] = useState(false);
 
   const handleCardClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     // Allow default browser behavior for right clicks, cmd+click, ctrl+click, middle click
@@ -139,6 +141,28 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
                 <span>{profile.languages.slice(0, 2).join(', ')}</span>
               </div>
             )}
+
+            {/* Direct Profile Canonical URL */}
+            <div className="flex items-center justify-between text-[11px] p-1.5 px-2.5 rounded-lg bg-black/60 border border-slate-800/80 mt-1">
+              <span className="font-mono text-emerald-400 text-[10px] truncate">
+                topcallgirls.online/profiles/{profile.slug}
+              </span>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  navigator.clipboard?.writeText(canonicalDirectUrl);
+                  setCopiedLink(true);
+                  setTimeout(() => setCopiedLink(false), 2000);
+                }}
+                className="text-[10px] text-slate-300 hover:text-white px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 transition cursor-pointer font-semibold flex items-center gap-1 shrink-0 ml-1.5"
+                title={`Copy direct URL for ${profile.displayName}`}
+              >
+                {copiedLink ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3 text-rose-400" />}
+                <span>{copiedLink ? 'Copied' : 'Copy Link'}</span>
+              </button>
+            </div>
           </div>
 
           <div className="pt-3 border-t border-slate-800 flex items-center justify-between mt-3 text-xs">
@@ -294,6 +318,28 @@ export const ProfileCard: React.FC<ProfileCardProps> = ({
               +{profile.services.length - 3}
             </span>
           )}
+        </div>
+
+        {/* Direct Profile Canonical URL */}
+        <div className="flex items-center justify-between text-[10px] p-1.5 px-2 rounded-lg bg-black/50 border border-slate-800/80">
+          <span className="font-mono text-emerald-400/90 truncate">
+            topcallgirls.online/profiles/{profile.slug}
+          </span>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              navigator.clipboard?.writeText(canonicalDirectUrl);
+              setCopiedLink(true);
+              setTimeout(() => setCopiedLink(false), 2000);
+            }}
+            className="text-[10px] text-slate-300 hover:text-white px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 transition cursor-pointer font-medium flex items-center gap-1 shrink-0 ml-1"
+            title={`Copy direct URL for ${profile.displayName}`}
+          >
+            {copiedLink ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3 text-rose-400" />}
+            <span>{copiedLink ? 'Copied' : 'Copy'}</span>
+          </button>
         </div>
 
         {/* Footer info & CTA */}

@@ -22,6 +22,7 @@ export const SAMPLE_PROFILES: Profile[] = [
   {
     id: '3',
     slug: 'aria-sterling',
+    directUrl: 'https://www.topcallgirls.online/profiles/aria-sterling',
     displayName: 'Aria Sterling',
     handle: '@ariasterling',
     tagline: '✨ Relax • Rejuvenate • Revitalize with Wellness4All Expert Massage Therapy ✨',
@@ -101,6 +102,7 @@ export const SAMPLE_PROFILES: Profile[] = [
   {
     id: '1',
     slug: 'maya-valentina',
+    directUrl: 'https://www.topcallgirls.online/profiles/maya-valentina',
     displayName: 'Maya Valentina',
     handle: '@mayavalentina',
     tagline: 'High-society companion & glamorous fashion model',
@@ -167,6 +169,7 @@ export const SAMPLE_PROFILES: Profile[] = [
   {
     id: '2',
     slug: 'chloe-monroe',
+    directUrl: 'https://www.topcallgirls.online/profiles/chloe-monroe',
     displayName: 'Chloe Monroe',
     handle: '@chloemonroe',
     tagline: 'Chic fashion model & luxury dinner hostess',
@@ -225,6 +228,7 @@ export const SAMPLE_PROFILES: Profile[] = [
   {
     id: '4',
     slug: 'elena-vance',
+    directUrl: 'https://www.topcallgirls.online/profiles/elena-vance',
     displayName: 'Elena Vance',
     handle: '@elena_vance',
     tagline: 'Stunning verified luxury companion & private hostess',
