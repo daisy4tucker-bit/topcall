@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "generate:sitemap": "tsx scripts/generate-sitemap.ts",
-    "build": "tsx scripts/generate-sitemap.ts && vite build && tsx scripts/generate-routes.ts",
+    "build": "node scripts/build.js",
     "preview": "vite preview",
     "start": "node server.js",
     "clean": "rm -rf dist server.js",
